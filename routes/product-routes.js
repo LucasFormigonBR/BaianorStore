@@ -10,7 +10,7 @@ router
         produtos.preco = req.body.preco;
         produtos.descricao = req.body.descricao;
 
-        produto.save(function(error){
+        produtos.save(function(error){
             if(error)
                 res.send("Erro ao tentar salvar um produto." + error);
 
