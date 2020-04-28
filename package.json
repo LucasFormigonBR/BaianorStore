@@ -2,9 +2,9 @@
   "name": "node-express",
   "version": "1.0.0",
   "description": "Projeto teste com Node.js e Express",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -17,9 +17,12 @@
   "author": "Luis Gustavo Araujo Soares",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^4.0.1",
     "body-parser": "1.19.0",
     "express": "4.17.1",
-    "mongoose": "^5.9.4",
+    "mongoose": "^5.9.4"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.2"
   }
 }
