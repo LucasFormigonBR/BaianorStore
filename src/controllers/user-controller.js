@@ -1,6 +1,21 @@
 const Usuario = require('../app/models/user');
 const express = require('express');
-const userRepository = require("../repositories/user-repository.js");
+const userRepository = require("../repositories/user-repository");
+const singupRepository = require('../repositories/singup-repository');
+
+//Register
+exports.userRegister = async function(req, res){
+    try{
+        //chamar repositório para registrar um usuário
+        await singupRepository.post({
+            username: req.body.username,
+            password: req.body.password
+        });
+
+    } catch (error){
+
+    }
+}
 
 //Login
 exports.login = async (req, res, next) => {
