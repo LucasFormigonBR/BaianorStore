@@ -3,17 +3,34 @@ const express = require('express');
 const userRepository = require("../repositories/user-repository");
 const singupRepository = require('../repositories/singup-repository');
 
+exports.login = async (req, res) => {
+    try {
+        const token = await userRepository.login(req.body.email, req.body.password);
+        res.status(200).send({ auth: true, token: token });
+    } catch (error) {
+        if (!e.status) {
+            res.status(500).json({ error: { code: 'Erro Desconhecido.', message: 'Um erro desconhecido ocorreu.' } });
+        } else {
+            res.status(e.status).json({ error: {code: e.code, message: e.message}});
+        }
+    }
+}
 //Register
-exports.userRegister = async function(req, res){
-    try{
-        //chamar repositório para registrar um usuário
+exports.userRegister = async function (req, res) {
+    //chamar repositório para registrar um usuário
+    try {
         await singupRepository.post({
-            username: req.body.username,
+            email: req.body.email,
             password: req.body.password
         });
-
-    } catch (error){
-
+        res.status(201).send({
+            message: "Usuário registrado com sucesso"
+        })
+    } catch (error) {
+        res.status(500).send({
+            message: "Falha ao registrar um usuário",
+            erro: error
+        });
     }
 }
 
@@ -22,8 +39,8 @@ exports.login = async (req, res, next) => {
     var email = req.body.email;
     var password = req.body.password;
 
-    Usuario.findOne({email: email, password: password}, function(err, user){
-        if(!user){
+    Usuario.findOne({ email: email, password: password }, function (err, user) {
+        if (!user) {
             return res.status(404).send({
                 message: "Email ou senha incorretos"
             });
@@ -55,32 +72,33 @@ exports.post = async (req, res) => {
 
 //Get All
 exports.get = async (req, res) => {
-    try{
+    try {
         var data = await userRepository.get();
         res.status(200).send(data);
-    } catch(error) {
+    } catch (error) {
         res.status(500).send({
-            message:"Falha na requisição",
-            erro:error
+            message: "Falha na requisição",
+            erro: error
         });
     }
 }
 
 //FindById
 exports.getById = async (req, res) => {
-    try{
+    try {
         const id = req.params.usuarioId;
         var data = await userRepository.getById(id);
-        if(data==null){
+        if (data == null) {
             res.status(200).send({
                 message: "O id especificado não foi encontrado."
-            });}
-        else{
+            });
+        }
+        else {
             res.status(200).send(data);
-            }
-    } catch (error){
+        }
+    } catch (error) {
         res.status(500).send({
-            message:"Falha ao processar requisição.",
+            message: "Falha ao processar requisição.",
             erro: error
         });
     }
@@ -89,15 +107,15 @@ exports.getById = async (req, res) => {
 //Put
 exports.put = async (req, res) => {
     try {
-        const id = req.params.usuarioId;    
+        const id = req.params.usuarioId;
         console.log(id);
         const data = await userRepository.put(id, req.body);
         res.status(200).send({
-            message:"Usuário atualizado com sucesso",
+            message: "Usuário atualizado com sucesso",
             dados: data
         })
     } catch (error) {
-         res.status(500).send({
+        res.status(500).send({
             message: "Falha na requisição",
             erro: error
         });
@@ -105,16 +123,16 @@ exports.put = async (req, res) => {
 }
 
 //Delete
-exports.delete = async (req, res) =>{
+exports.delete = async (req, res) => {
     try {
         const id = req.params.usuarioId;
         await userRepository.delete(id)
         console.log(id);
         res.status(200).send({
-            message:"Usuário removido com sucesso",
+            message: "Usuário removido com sucesso",
         })
     } catch (error) {
-         res.status(500).send({
+        res.status(500).send({
             message: "Falha na requisição",
             erro: error
         });
