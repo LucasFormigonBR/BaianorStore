@@ -7,7 +7,7 @@ const autorization = require('../services/auth-service');
 router.post("/", produtoController.post);
 
 //Get All
-router.get("/",autorization.authorize, produtoController.getAll);
+router.get("/",autorization.authorize, produtoController.get);
 
 //FindById
 router.get("/:produtoId", produtoController.getById);
