@@ -1,26 +1,25 @@
-var Produto = require('../app/models/produto');
+var Games = require('../app/models/games');
 var mongoose = require('mongoose');
 
 exports.get = async () => {
-    const res = await Produto.find();
+    const res = await Games.find();
     return res;
 }
 
 exports.getById = async(id) => {
-    const res = await Produto.findById(id);
+    const res = await Games.findById(id);
     return res;
 }
 
 exports.post = async(data) => {
-    const product = Produto(data);
-    await product.save();
+    const games = Games(data);
+    await games.save();
 }
 
 exports.put = async(id, data) => {
-    await Produto.findByIdAndUpdate(id, {
+    await Games.findByIdAndUpdate(id, {
         $set:{
-            estoque: data.estoque,
-            nome: data.nome,
+            titulo: data.titulo,
             preco: data.preco,
             descricao: data.descricao
         }
@@ -28,5 +27,5 @@ exports.put = async(id, data) => {
 }
 
 exports.delete = async(id) =>{
-    await Produto.findOneAndRemove(id);
+    await Games.findOneAndRemove(id);
 }

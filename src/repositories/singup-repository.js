@@ -17,5 +17,3 @@ const newUser = new User();
             }
         });
     }
-
-//Login

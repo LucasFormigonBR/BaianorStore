@@ -1,12 +1,13 @@
 const express = require('express');
 var router = express.Router(); //interceptação das rotas
 const userController = require('../controllers/user-controller');
+const autoriza = require('../services/auth-service');
 
 //Login
 router.post("/login", userController.login);
 
 //Post
-router.post("/registrar", userController.post);
+router.post("/register", userController.post);
 
 //Get All
 router.get("/", userController.get);

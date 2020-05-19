@@ -18,7 +18,7 @@ var port = process.env.port || 3000;
 
 //ROTAS
 var indexRoute = require("./src/routes/index-routes");
-var productRoute = require("./src/routes/produtos-route");
+var gamesRoute = require("./src/routes/games-route");
 var userRoute = require("./src/routes/user-route");
 const signupRoute = require('./src/routes/singup-route');
 const loginRoute = require('./src/routes/login-route');
@@ -27,7 +27,7 @@ const loginRoute = require('./src/routes/login-route');
 app.use('/api', indexRoute);
 
 //Rotas para produtos
-app.use('/api/produtos', productRoute);
+app.use('/api/games', gamesRoute);
 //Rotas para usuários
 app.use('/api/users', userRoute);
 //Rotas para Registros
@@ -37,5 +37,4 @@ app.use('/api/login', loginRoute);
 
 app.listen(port, () => {
     console.log('Server up and running!');
-
 });

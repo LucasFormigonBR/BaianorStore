@@ -8,10 +8,10 @@ exports.login = async (req, res) => {
         const token = await userRepository.login(req.body.email, req.body.password);
         res.status(200).send({ auth: true, token: token });
     } catch (error) {
-        if (!e.status) {
+        if (!error.status) {
             res.status(500).json({ error: { code: 'Erro Desconhecido.', message: 'Um erro desconhecido ocorreu.' } });
         } else {
-            res.status(e.status).json({ error: {code: e.code, message: e.message}});
+            res.status(error.status).json({ error: {code: error.code, message: error.message}});
         }
     }
 }
@@ -35,7 +35,7 @@ exports.userRegister = async function (req, res) {
 }
 
 //Login
-exports.login = async (req, res, next) => {
+/*exports.login = async (req, res, next) => {
     var email = req.body.email;
     var password = req.body.password;
 
@@ -49,7 +49,7 @@ exports.login = async (req, res, next) => {
             message: email + " Logado"
         });
     })
-};
+};*/
 
 //Post
 exports.post = async (req, res) => {
