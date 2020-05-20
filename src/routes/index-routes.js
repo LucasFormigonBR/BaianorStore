@@ -15,11 +15,11 @@ next();
 });
 
 router.get('/', (req, res) => {
-    res.sendfile('./views/login.html');
+    res.sendfile('src/views/login.html');
 });
 
 router.get('/api/register', (req, res) => {
-    res.sendfile('./views/cadastro.html');
+    res.sendfile('src/views/cadastro.html');
 });
 
 module.exports = router;

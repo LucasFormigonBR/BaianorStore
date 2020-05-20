@@ -13,6 +13,10 @@ mongoose.connect('mongodb+srv://luisgust08:1234567890@cluster0-pyifx.mongodb.net
 //Configuração do server para usar body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+//app.use(express.static('./app/public'));
+//app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
+
+app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 
 //Definindo a porta via arquivo de configuração
 var port = process.env.port || 3000;
