@@ -2,6 +2,7 @@
 // import bodyParser from 'body-parser';
 var express = require ('express');
 var bodyParser = require('body-parser');
+const path = require('path');
 const app = express();
 var mongoose = require('mongoose');
 
@@ -24,7 +25,7 @@ const signupRoute = require('./src/routes/singup-route');
 const loginRoute = require('./src/routes/login-route');
 
 //Vincular a aplicacao (app) com o motor de rotas
-app.use('/api', indexRoute);
+app.use('/', indexRoute);
 
 //Rotas para produtos
 app.use('/api/games', gamesRoute);

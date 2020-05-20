@@ -14,4 +14,12 @@ next();
     
 });
 
+router.get('/', (req, res) => {
+    res.sendfile('./views/login.html');
+});
+
+router.get('/api/register', (req, res) => {
+    res.sendfile('./views/cadastro.html');
+});
+
 module.exports = router;
