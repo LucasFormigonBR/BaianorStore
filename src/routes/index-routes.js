@@ -14,12 +14,12 @@ next();
     
 });
 
-router.get('/', (req, res) => {
+/*router.get('/', (req, res) => {
     res.sendfile('src/views/login.html');
 });
 
 router.get('/api/register', (req, res) => {
     res.sendfile('src/views/cadastro.html');
-});
+});*/
 
 module.exports = router;
