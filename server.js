@@ -5,6 +5,9 @@ const app = express();
 const mongoose = require('mongoose');
 const handlebars = require('express-handlebars');
 
+//CSS
+app.use(express.static('src/public'));
+
 //Config
     //Template Engine
     app.engine('handlebars', handlebars({ defaultLayout: 'main'}))
