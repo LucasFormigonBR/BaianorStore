@@ -55,6 +55,16 @@ app.get('/register', function(req, res){
     res.render('cadastro');
 })
 
+app.post('/api/register', function(req, res){
+    req.body.email;
+    req.body.senha;
+})
+
+app.post('/api/login', function(req, res){
+    req.body.email;
+    req.body.senha;
+})
+
 app.listen(port, () => {
     console.log('Server up and running!');
 });
