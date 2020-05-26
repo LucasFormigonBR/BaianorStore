@@ -4,6 +4,13 @@ const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
 const handlebars = require('express-handlebars');
+const autorization = require('./src/services/auth-service');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+
+//Cookies
+app.use(cors());
+app.use(cookieParser());
 
 //CSS
 app.use(express.static('src/public'));
@@ -58,9 +65,19 @@ app.get('/register', function(req, res){
     res.render('cadastro');
 })
 
+app.get('/logout', function(req, res) {
+  res.status(200).send({ auth: false, token: null });
+});
+
+app.get('/index', autorization.authorize, function(req, res){
+    res.render('index');
+})
+
 app.post('/api/register', function(req, res){
+    req.body.username;
     req.body.email;
     req.body.senha;
+    console.log(req.body.username);
 })
 
 app.post('/api/login', function(req, res){

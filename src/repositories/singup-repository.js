@@ -6,6 +6,7 @@ exports.post = async(data) => {
     console.log(data);
 
 const newUser = new User();
+        newUser.username = data.username;
         newUser.email = data.email;
         newUser.password = newUser.generateHash(data.password)
         newUser.save((err, res) => {

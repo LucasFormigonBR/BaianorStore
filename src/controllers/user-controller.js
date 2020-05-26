@@ -3,10 +3,13 @@ const express = require('express');
 const userRepository = require("../repositories/user-repository");
 const singupRepository = require('../repositories/singup-repository');
 
+
 exports.login = async (req, res) => {
     try {
         const token = await userRepository.login(req.body.email, req.body.password);
-        res.status(200).send({ auth: true, token: token });
+        res.cookie('x-access-token', token);
+        console.log("controller" + req.cookies['x-access-token']);
+        res.redirect('/index');
     } catch (error) {
         if (!error.status) {
             res.status(500).json({ error: { code: 'Erro Desconhecido.', message: 'Um erro desconhecido ocorreu.' } });
@@ -15,11 +18,13 @@ exports.login = async (req, res) => {
         }
     }
 }
+
 //Register
 exports.userRegister = async function (req, res) {
     //chamar repositório para registrar um usuário
     try {
         await singupRepository.post({
+            username: req.body.username,
             email: req.body.email,
             password: req.body.password
         });
@@ -33,23 +38,6 @@ exports.userRegister = async function (req, res) {
         });
     }
 }
-
-//Login
-/*exports.login = async (req, res, next) => {
-    var email = req.body.email;
-    var password = req.body.password;
-
-    Usuario.findOne({ email: email, password: password }, function (err, user) {
-        if (!user) {
-            return res.status(404).send({
-                message: "Email ou senha incorretos"
-            });
-        }
-        return res.status(200).send({
-            message: email + " Logado"
-        });
-    })
-};*/
 
 //Post
 exports.post = async (req, res) => {

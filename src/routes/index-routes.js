@@ -6,7 +6,6 @@ router.use("/", (req, res, next) => {
         try {
         data = [req.method, req.path, req.body]
         fs.appendFileSync('requests.txt', JSON.stringify(data)+"\r\n");
-        console.log('Os requests foram salvos no arquivo de log "requests.txt"!');
         } catch (err) {
   console.log(err);
 }

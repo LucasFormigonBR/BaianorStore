@@ -5,7 +5,6 @@ require("dotenv-safe").config();
 
 exports.login = async(mail, pass) => {    
     const user = await Usuario.findOne({ email: mail });
-    console.log(user);
     const id = user._id;
     if (user.email === mail && user.ValidPassword(pass)){
         const token = jwt.sign({id}, process.env.SECRET, {expiresIn: 18000}); //5 min
@@ -33,7 +32,7 @@ exports.getById = async(id) => {
 exports.put = async(id, data) => {
     await Usuario.findByIdAndUpdate(id, {
         $set:{
-            nome: data.nome,
+            username: data.username,
             email: data.email,
             password: data.password
         }
