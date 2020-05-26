@@ -2,13 +2,13 @@ const Usuario = require('../app/models/user');
 const express = require('express');
 const userRepository = require("../repositories/user-repository");
 const singupRepository = require('../repositories/singup-repository');
-
+const cookieParser = require('cookie-parser');
 
 exports.login = async (req, res) => {
     try {
         const token = await userRepository.login(req.body.email, req.body.password);
         res.cookie('x-access-token', token);
-        console.log("controller" + req.cookies['x-access-token']);
+        console.log("controller " + req.cookies['x-access-token']);
         res.redirect('/index');
     } catch (error) {
         if (!error.status) {

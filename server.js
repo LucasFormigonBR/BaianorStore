@@ -65,9 +65,15 @@ app.get('/register', function(req, res){
     res.render('cadastro');
 })
 
-app.get('/logout', function(req, res) {
-  res.status(200).send({ auth: false, token: null });
+app.get('/logout', function(req, res){
+   res.clearCookie('x-access-token');
+   res.redirect('/');
+   console.log('cookie x-acces-token cleared');
 });
+
+/*app.get('/logout', function(req, res) {
+  res.status(200).send({ auth: false, token: null });
+});*/
 
 app.get('/index', autorization.authorize, function(req, res){
     res.render('index');
