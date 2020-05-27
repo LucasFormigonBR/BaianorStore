@@ -28,9 +28,10 @@ exports.userRegister = async function (req, res) {
             email: req.body.email,
             password: req.body.password
         });
-        res.status(201).send({
+        res.render('cadastrado');
+        /*res.status(201).send({
             message: "Usuário registrado com sucesso"
-        })
+        })*/
     } catch (error) {
         res.status(500).send({
             message: "Falha ao registrar um usuário",

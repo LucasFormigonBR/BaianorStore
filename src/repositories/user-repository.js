@@ -7,10 +7,11 @@ exports.login = async(mail, pass) => {
     const user = await Usuario.findOne({ email: mail });
     const id = user._id;
     if (user.email === mail && user.ValidPassword(pass)){
-        const token = jwt.sign({id}, process.env.SECRET, {expiresIn: 300}); //5 min
+        const token = jwt.sign({id}, process.env.SECRET, {expiresIn: 1800}); //5 min
         return token;
     } else{
-        throw({status: 404, code: 'Usuário não encontrado.', message: 'Tente outro E-mail.'});
+        res.render('not-found');
+        //throw({status: 404, code: 'Usuário não encontrado.', message: 'Tente outro E-mail.'});
     }
 }
 

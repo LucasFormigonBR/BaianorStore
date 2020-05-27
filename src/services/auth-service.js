@@ -6,11 +6,13 @@ exports.authorize = function(req, res, next){
     //1 passo - busco o token
     const token = req.cookies['x-access-token'];
     if (!token){
-        res.status(401).json({auth: false, message: 'Acesso Restrito.'});
+        res.render('acesso-restrito');
+        //res.status(401).json({auth: false, message: 'Acesso Restrito.'});
     } else {
         jwt.verify(token, process.env.SECRET, function (error, decode){
             if (error){
-                res.status(401).json({auth: false, message: 'Token Inválido.'});
+                res.render('token-invalido');
+                //res.status(401).json({auth: false, message: 'Token Inválido.'});
             } else {
                 next();
             }

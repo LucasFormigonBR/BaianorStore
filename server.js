@@ -13,8 +13,8 @@ app.use(cors());
 app.use(cookieParser());
 
 //CSS
-app.use(express.static('src/public'));
-
+app.use(express.static('./src/public'));
+app.use(express.static('./src'));
 //Config
     //Template Engine
     app.engine('handlebars', handlebars({ defaultLayout: 'main'}))
@@ -30,10 +30,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-//app.use(express.static('./app/public'));
 //app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
-app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
+//app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 
 //Definindo a porta via arquivo de configuração
 var port = process.env.port || 3000;
@@ -68,16 +67,20 @@ app.get('/register', function(req, res){
 app.get('/logout', function(req, res){
    res.clearCookie('x-access-token');
    res.redirect('/');
-   console.log('cookie x-acces-token cleared');
+   console.log('token apagado');
 });
 
-/*app.get('/logout', function(req, res) {
-  res.status(200).send({ auth: false, token: null });
+/*app.get('/api/register',function(req,res){
+    res.render('/register', {message : 'Cadastrado com sucesso.'});
 });*/
 
 app.get('/index', autorization.authorize, function(req, res){
     res.render('index');
-})
+});
+
+app.get('/graficos', function(req, res){
+    res.render('graficos');
+});
 
 app.post('/api/register', function(req, res){
     req.body.username;
