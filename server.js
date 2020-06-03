@@ -13,8 +13,9 @@ app.use(cors());
 app.use(cookieParser());
 
 //CSS
-app.use(express.static('./src/public'));
-app.use(express.static('./src'));
+//app.use(express.static('./src/public'));
+app.use(express.static('./node_modules/bootstrap/dist'));
+//app.use(express.static('./src'));
 //Config
     //Template Engine
     app.engine('handlebars', handlebars({ defaultLayout: 'main'}))
@@ -55,6 +56,8 @@ app.use('/api/users', userRoute);
 app.use('/api/register', signupRoute);
 //Rotas para Login
 app.use('/api/login', loginRoute);
+//Rotas para Lista de Jogos
+//app.use('/api/lista', listaRoute);
 
 app.get('/', function(req,res){
     res.render('login');
