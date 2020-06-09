@@ -8,6 +8,7 @@ const autorization = require('./src/services/auth-service');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
+
 //Cookies
 app.use(cors());
 app.use(cookieParser());
@@ -15,6 +16,7 @@ app.use(cookieParser());
 //CSS
 //app.use(express.static('./src/public'));
 app.use(express.static('./node_modules/bootstrap/dist'));
+app.use(express.static('./src/app/models'));
 //app.use(express.static('./src'));
 //Config
     //Template Engine
@@ -44,7 +46,7 @@ const gamesRoute = require("./src/routes/games-route");
 const userRoute = require("./src/routes/user-route");
 const signupRoute = require('./src/routes/singup-route');
 const loginRoute = require('./src/routes/login-route');
-
+const games = require('./src/app/models/games.js'); //Replace participant with the name of your created model
 //Vincular a aplicacao (app) com o motor de rotas
 app.use('/', indexRoute);
 
@@ -61,11 +63,11 @@ app.use('/api/login', loginRoute);
 
 app.get('/', function(req,res){
     res.render('login');
-})
+});
 
 app.get('/register', function(req, res){
     res.render('cadastro');
-})
+});
 
 app.get('/logout', function(req, res){
    res.clearCookie('x-access-token');
@@ -73,16 +75,16 @@ app.get('/logout', function(req, res){
    console.log('token apagado');
 });
 
-/*app.get('/api/register',function(req,res){
-    res.render('/register', {message : 'Cadastrado com sucesso.'});
-});*/
-
 app.get('/index', autorization.authorize, function(req, res){
     res.render('index');
 });
 
-app.get('/graficos', function(req, res){
+app.get('/graficos', autorization.authorize, function(req, res){
     res.render('graficos');
+});
+
+app.get('/biblioteca', autorization.authorize, function(req, res){
+    res.render('biblioteca');
 });
 
 app.post('/api/register', function(req, res){
@@ -90,12 +92,12 @@ app.post('/api/register', function(req, res){
     req.body.email;
     req.body.senha;
     console.log(req.body.username);
-})
+});
 
 app.post('/api/login', function(req, res){
     req.body.email;
     req.body.senha;
-})
+});
 
 app.listen(port, () => {
     console.log('Server up and running!');

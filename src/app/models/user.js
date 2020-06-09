@@ -10,6 +10,11 @@ var userSchema = new Schema({
     signUpDate: {type: Date, defaut: Date.now()}
 });
 
+games = [{
+    type : mongoose.Schema.Types.ObjectId,
+    ref : 'Games'
+  }]
+
 //Registro
 userSchema.methods.generateHash = function(password){
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)

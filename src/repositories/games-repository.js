@@ -1,6 +1,11 @@
 var Games = require('../app/models/games');
 var mongoose = require('mongoose');
 
+exports.post = async(data) => {
+    const games = Games(data);
+    await games.save();
+}
+
 exports.get = async () => {
     const res = await Games.find();
     return res;
@@ -9,11 +14,6 @@ exports.get = async () => {
 exports.getById = async(id) => {
     const res = await Games.findById(id);
     return res;
-}
-
-exports.post = async(data) => {
-    const games = Games(data);
-    await games.save();
 }
 
 exports.put = async(id, data) => {

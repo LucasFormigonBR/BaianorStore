@@ -6,6 +6,7 @@ exports.post = function (req, res) {
     games.titulo = req.body.titulo;
     games.preco = req.body.preco;
     games.descricao = req.body.descricao;
+    games.vendas = req.body.vendas;
 
     games.save(function (error) {
         if (error)
