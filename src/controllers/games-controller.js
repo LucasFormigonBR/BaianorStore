@@ -24,7 +24,6 @@ exports.get = function (req, res) {
             res.send(err);
 
         res.status(200).json({
-            message: 'Jogos retornados.',
             qtde:gams.length,
             games: gams
         });
