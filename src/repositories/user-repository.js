@@ -7,7 +7,7 @@ exports.login = async(mail, pass) => {
     const user = await Usuario.findOne({ email: mail });
     const id = user._id;
     if (user.email === mail && user.ValidPassword(pass)){
-        const token = jwt.sign({id}, process.env.SECRET, {expiresIn: 1800}); //5 min
+        const token = jwt.sign({id}, process.env.SECRET, {expiresIn: 39000000}); //5 min
         return token;
     } else{
         res.render('not-found');
