@@ -7,6 +7,7 @@ const handlebars = require('express-handlebars');
 const autorization = require('./src/services/auth-service');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const Games = require("./src/app/models/games");
 
 
 //Cookies
@@ -93,6 +94,17 @@ app.post('/api/register', function(req, res){
     req.body.senha;
     console.log(req.body.username);
 });
+
+//PARA ALTERAR UM REGISTRO
+app.get('/editar-games/:id', (req, res) => {
+    Games.findById(req.params.id).sort({date:'desc'}).lean().then((game) => {
+        console.log(game);
+      res.render('editar-games',{game:game});
+      }).catch((err) => {
+          req.flash('error_msg',"Houve um erro ao listar"+err);
+  
+      });
+  });
 
 app.post('/api/login', function(req, res){
     req.body.email;
