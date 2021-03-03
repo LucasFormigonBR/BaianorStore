@@ -30,7 +30,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.4",
     "parser": "^0.1.4",
-    "pug": "^2.0.4"
+    "pug": "^3.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
